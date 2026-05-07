@@ -1,11 +1,11 @@
 /**
  * Challenge:
- * 
+ *
  * - Create a Die component that takes a `value` prop
  * - Render 10 instances of the Die component (manually)
  *      - Provide a number between 1-6 for the value on each
  *        for now
- * - Style the <main> and <Die> components 
+ * - Style the <main> and <Die> components
  *   to look like they do in the slide
  *      - Hints: Create a container to hold the 10 instances
  *        of the Die component, and use CSS Grid to lay them
@@ -14,6 +14,23 @@
  *        in the center of the page
  */
 
+import Die from './components/Die'
+
 export default function App() {
-    return <main></main>
+    return (
+        <main>
+            <div className='dice-container'>
+                <Die value={1} />
+                <Die value={2} />
+                <Die value={3} />
+                <Die value={4} />
+                <Die value={5} />
+                <Die value={6} />
+                <Die value={7} />
+                <Die value={8} />
+                <Die value={9} />
+                <Die value={2} />
+            </div>
+        </main>
+    )
 }
