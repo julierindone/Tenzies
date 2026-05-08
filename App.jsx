@@ -1,36 +1,34 @@
-/**
- * Challenge:
- *
- * - Create a Die component that takes a `value` prop
- * - Render 10 instances of the Die component (manually)
- *      - Provide a number between 1-6 for the value on each
- *        for now
- * - Style the <main> and <Die> components
- *   to look like they do in the slide
- *      - Hints: Create a container to hold the 10 instances
- *        of the Die component, and use CSS Grid to lay them
- *        out evenly in 2 rows of 5 columns
- *      - Use flexbox on main to center the dice container
- *        in the center of the page
+/** Challenges:
+ * Write a function (generateAllNewDice) that returns an arrayof 10 random numbers between 1-6 inclusive.
+ * * * * * * * * * * * * * * * * * * * * * * * *
+ * Create state to hold our array of numbers.
+ * Initialize the state by calling our `generateAllNewDice` function so it loads all new dice as soon as the app loads
+ * Map over the state numbers array to generate our array of Die elements and render those in place of our manually-written 10 Die elements.
  */
 
+import React from 'react'
 import Die from './components/Die'
 
 export default function App() {
-    return (
-        <main>
-            <div className='dice-container'>
-                <Die value={1} />
-                <Die value={2} />
-                <Die value={3} />
-                <Die value={4} />
-                <Die value={5} />
-                <Die value={6} />
-                <Die value={7} />
-                <Die value={8} />
-                <Die value={9} />
-                <Die value={2} />
-            </div>
-        </main>
-    )
+	const [currentDice, setCurrentDice] = React.useState(generateAllNewDice)
+
+	function generateAllNewDice() {
+		// create array with 10 items => fill with zeroes => map to replace with random #s 1-6
+		return new Array(10).fill(0).map(num => Math.ceil(Math.random() * 6))
+	}
+
+	function rollDice() {
+		setCurrentDice(generateAllNewDice)
+	}
+
+	const diceElements = currentDice.map(currentDie => <Die value={currentDie} />)
+
+	return (
+		<main>
+			<div className='dice-container'>
+				{diceElements}
+			</div>
+			<button id='roll-button' onClick={rollDice}>Roll dice</button>
+		</main>
+	)
 }
