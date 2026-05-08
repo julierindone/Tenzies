@@ -1,27 +1,37 @@
 /** Challenges:
- * Write a function (generateAllNewDice) that returns an arrayof 10 random numbers between 1-6 inclusive.
- * * * * * * * * * * * * * * * * * * * * * * * *
- * Create state to hold our array of numbers.
- * Initialize the state by calling our `generateAllNewDice` function so it loads all new dice as soon as the app loads
- * Map over the state numbers array to generate our array of Die elements and render those in place of our manually-written 10 Die elements.
+ * Update the array of numbers in state to be an array of objects with isHeld, value, and id properties.
+ * Add keys to button components.
  */
 
 import React from 'react'
 import Die from './components/Die'
+import { nanoid } from 'nanoid'
 
 export default function App() {
 	const [currentDice, setCurrentDice] = React.useState(generateAllNewDice)
 
 	function generateAllNewDice() {
-		// create array with 10 items => fill with zeroes => map to replace with random #s 1-6
-		return new Array(10).fill(0).map(num => Math.ceil(Math.random() * 6))
+		return new Array(10)
+			.fill({ value: 0, isHeld: false, id: 0 })
+			.map(die => ({
+				...die,
+				value: Math.ceil(Math.random() * 6),
+				id: nanoid()
+			}))
 	}
 
 	function rollDice() {
 		setCurrentDice(generateAllNewDice)
 	}
 
-	const diceElements = currentDice.map(currentDie => <Die value={currentDie} />)
+	const diceElements = currentDice.map(currentDie =>
+		<Die
+			key={currentDie.id}
+			currentDie={currentDie}
+			value={currentDie.value}
+			isHeld={currentDie.isHeld}
+			id={currentDie.id}
+			/>)
 
 	return (
 		<main>

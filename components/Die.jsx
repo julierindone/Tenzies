@@ -1,5 +1,4 @@
-export default function Die(props) {
+export default function Die({ value, isHeld, id }) {
 	return (
-		<button>{props.value}</button>
-	)
+		<button id={id}>{value}</button>)
 }
