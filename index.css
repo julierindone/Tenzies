@@ -74,14 +74,14 @@ main {
 }
 
 #roll-button {
-    font-size: 1rem;
+    font-size: 0.95rem;
     font-weight: 500;
     font-family: inherit;
     color: white;
     background-color: #5035FF;
-    width: 6.5rem;
+    min-width: 6.5rem;
     border: unset;
     border-radius: 6px;
-    padding: 6px 9px;
+    padding: .4rem 1rem;
     margin-top: 1.6rem;
 }

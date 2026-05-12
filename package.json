@@ -1,6 +1,7 @@
 {
-  "name": "Scrim-s06j01r",
-  "description": "https://scrimba.com/frontend-path-c0j/~07nm",
+  "name": "tenzies",
+  "version": "0.0.0",
+  "type": "module",
   "scripts": {
     "start": "vite",
     "dev": "vite",
@@ -9,11 +10,16 @@
   },
   "dependencies": {
     "nanoid": "^5.1.11",
-    "react": "19.0.0-rc-8b08e99e-20240713",
-    "react-dom": "19.0.0-rc-8b08e99e-20240713",
+    "react": "^19.2.5",
+    "react-confetti": "^6.4.0",
+    "react-dom": "^19.2.5",
     "vite": "latest"
   },
   "devDependencies": {
-    "@vitejs/plugin-react": "*"
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.1",
+    "globals": "^17.5.0",
+    "vite": "^8.0.10"
   }
 }

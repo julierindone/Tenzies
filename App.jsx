@@ -1,22 +1,23 @@
-/*
-	Add conditional styling to the Die component so that if it's held (isHeld === true), its background color changes to green (#59E391)
-------------
-	Create a function `hold` that takes `id` as a parameter.
-	Pass that function down to each instance of the Die component so when each one is clicked, it logs its id.
-------------
-	Update the `hold` function to flip the `isHeld` property on the object in the array
-	that was clicked, based on the `id` prop passed into the function.
-------------
-	Update the `rollDice` function to look through the existing dice to NOT roll any that are being `held`.
- */
+/*When all dice are being held & have the same value,
+	drop confetti and change button text. */
 
 import { useState } from 'react'
 import Die from './components/Die'
 import { nanoid } from 'nanoid'
+import Confetti from 'react-confetti'
 
 export default function App() {
 	const [currentDice, setCurrentDice] = useState(generateAllNewDice)
-	const [count, setCount] = useState(0)
+	const gameWon = currentDice.every(die => die.isHeld && currentDice.every(die => die.value === currentDice[0].value))
+
+	const diceElements = currentDice.map(currentDie =>
+		<Die
+			key={currentDie.id}
+			value={currentDie.value}
+			isHeld={currentDie.isHeld}
+			id={currentDie.id}
+			clickToHold={hold}
+		/>)
 
 	function generateAllNewDice() {
 		return new Array(10)
@@ -46,17 +47,9 @@ export default function App() {
 		)
 	}
 
-	const diceElements = currentDice.map(currentDie =>
-		<Die
-			key={currentDie.id}
-			value={currentDie.value}
-			isHeld={currentDie.isHeld}
-			id={currentDie.id}
-			clickToHold={hold}
-		/>)
-
 	return (
 		<main>
+			{gameWon && <Confetti />}
 			<h1 className="title">Tenzies</h1>
 			<p className="instructions">
 				Roll until all dice are the same. Click each die to freeze it at its current value between rolls.
@@ -64,7 +57,7 @@ export default function App() {
 			<div className='dice-container'>
 				{diceElements}
 			</div>
-			<button id='roll-button' onClick={rollDice}>Roll dice</button>
+			<button id='roll-button' onClick={rollDice}>{gameWon ? "New game" : "Roll dice"}</button>
 		</main>
 	)
 }
